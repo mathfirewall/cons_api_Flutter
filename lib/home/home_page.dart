@@ -50,22 +50,23 @@ class _HomePageState extends State<HomePage> {
                 }
                 //aqui como foi tudo OK ele passa a chamar e mostrar a consulta
                 if (snapshot.hasData) {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
+                  return ListView.separated(
+                      itemBuilder: (BuildContext context, int index) {
                         final dados = snapshot.data![index];
                         return ListTile(
-                          
                           title: Text(
-                              "Titulo: " +
-                                  dados['title'].toString(),
-                              style: TextStyle(fontSize: 20, color: Colors.blueAccent)),
+                            "Titulo: " + dados['title'].toString(),
+                            style: TextStyle(color: Colors.blueAccent),
+                          ),
                           subtitle: Text(
-                              "Completed: " +
-                                  dados['completed'].toString(),
-                              style: TextStyle(fontSize: 16, color: Colors.black87)),
+                            "Completo: " + dados['completed'].toString(),
+                            style: TextStyle(color: Colors.black87),
+                          ),
                         );
-                      });
+                      },
+                      padding: EdgeInsets.all(16),
+                      separatorBuilder: (_, __) => Divider(),
+                      itemCount: snapshot.data!.length);
                 }
                 // essa função se caso aja algum problema no carregamento ele mostra o carregamento em Tela
                 return Center(
